@@ -1,0 +1,7 @@
+# https://www.appveyor.com/docs/appveyor-yml/
+# https://www.appveyor.com/docs/environment-variables/
+# https://www.yamllint.com
+
+# Without this, the following error shows up:
+# "Specify a project or solution file. The directory does not contain a project or solution file."
+build: off
