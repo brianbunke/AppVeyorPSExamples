@@ -2,6 +2,10 @@
     It 'Compares $true to itself' {
         $true | Should Be $true
     }
+
+    It 'Ensures the readme file did not disappear' {
+        Get-Item .\readme.md | Should Exist
+    }
 }
 
 Describe 'Integration Test' -Tag 'integration' {
