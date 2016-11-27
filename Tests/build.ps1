@@ -1,13 +1,10 @@
-﻿Write-Host "Branch: $env:APPVEYOR_REPO_BRANCH"
-Write-Host "Author: $env:APPVEYOR_REPO_COMMIT_AUTHOR"
-Write-Host "PR: $env:APPVEYOR_PULL_REQUEST_NUMBER"
-
-# Pester. Let's run some tests!
-# https://github.com/pester/Pester/wiki/Showing-Test-Results-in-CI-(TeamCity,-AppVeyor)
-# https://www.appveyor.com/docs/running-tests/#build-worker-api
+﻿# Pester. Let's run some tests!
 
 # Make this a stupid, quick function to avoid repeating the code twice
 function Pester-AppVeyor ($Tag) {
+    # https://github.com/pester/Pester/wiki/Showing-Test-Results-in-CI-(TeamCity,-AppVeyor)
+    # https://www.appveyor.com/docs/running-tests/#build-worker-api
+
     # Invoke-Pester runs all .Tests.ps1 in the order found by "Get-ChildItem -Recurse"
     $TestResults = Invoke-Pester -Tag $Tag -OutputFormat NUnitXml -OutputFile ".\TestResults.xml" -PassThru
     # Upload the XML file of test results to the current AppVeyor job
