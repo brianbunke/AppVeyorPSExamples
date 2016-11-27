@@ -25,7 +25,7 @@ Pester-AppVeyor -Tag 'unit'
 # Stop here if this isn't the master branch, or if this is a pull request
 If ($env:APPVEYOR_REPO_BRANCH -ne 'master') {
     Write-Warning "Skipping integration tests for branch $env:APPVEYOR_REPO_BRANCH"
-} ElseIf ($env:APPVEYOR_PULL_REQUEST_NUMBER -gt 1) {
+} ElseIf ($env:APPVEYOR_PULL_REQUEST_NUMBER -gt 0) {
     Write-Warning "Skipping integration tests for pull request #$env:APPVEYOR_PULL_REQUEST_NUMBER"
 } Else {
     # Invoke-Pester against the integration tests
