@@ -25,3 +25,11 @@ install:
 # Offload all PowerShell test/build work to a separate file
 test_script:
   - ps: . .\Tests\build.ps1
+
+# Post in my Slack #builds channel
+# The "secure:" value is the Appveyor encryption of my Slack API "test" token
+notifications:
+  - provider: Slack
+    auth_token:
+      secure: +Y/c3bM0RNleCHnyAo+QHxn7PqTfaQdfHoh6Ki6ZMTsF8Aut5/ND1GIIb8cVwuahNj77QKyLCFvHNx0Yx9F12g==
+    channel: '#builds'

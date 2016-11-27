@@ -1,8 +1,6 @@
 ﻿Write-Host "Branch: $env:APPVEYOR_REPO_BRANCH"
 Write-Host "Author: $env:APPVEYOR_REPO_COMMIT_AUTHOR"
 
-(Get-ChildItem -Recurse -File).FullName
-
 # Pester. Let's run some tests!
 # https://github.com/pester/Pester/wiki/Showing-Test-Results-in-CI-(TeamCity,-AppVeyor)
 # https://www.appveyor.com/docs/running-tests/#build-worker-api
