@@ -5,7 +5,7 @@ Write-Host "Author: $env:APPVEYOR_REPO_COMMIT_AUTHOR"
 # https://github.com/pester/Pester/wiki/Showing-Test-Results-in-CI-(TeamCity,-AppVeyor)
 # https://www.appveyor.com/docs/running-tests/#build-worker-api
 
-# Make this a stupid quick function to avoid repeating the code twice
+# Make this a stupid, quick function to avoid repeating the code twice
 function Pester-AppVeyor ($Tag) {
     # Invoke-Pester runs all .Tests.ps1 in the order found by "Get-ChildItem -Recurse"
     $TestResults = Invoke-Pester -Tag $Tag -OutputFormat NUnitXml -OutputFile ".\TestResults.xml" -PassThru
@@ -20,4 +20,13 @@ function Pester-AppVeyor ($Tag) {
 }
 
 Pester-AppVeyor -Tag 'unit'
-Pester-AppVeyor -Tag 'integration'
+
+# Stop here if this isn't the master branch, or if this is a pull request
+If ($env:APPVEYOR_REPO_BRANCH -ne 'master') {
+    Write-Verbose "Skipping integration tests for branch $env:APPVEYOR_REPO_BRANCH"
+} ElseIf ($env:APPVEYOR_PULL_REQUEST_NUMBER -gt 1) {
+    Write-Verbose "Skipping integration tests for pull request #$env:APPVEYOR_PULL_REQUEST_NUMBER"
+} Else {
+    # Invoke-Pester against the integration tests
+    Pester-AppVeyor -Tag 'integration'
+}

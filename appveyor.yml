@@ -11,8 +11,8 @@ skip_commits:
   files:
     - README.md
 
-# PRs, by definition, don't change anything and should increment the version
-# To be fair, this is not important, and just AppVeyor enabling my pedantry
+# PRs, by definition, don't change anything and therefore should not increment the version
+# To be fair, this is not important, and is really just AppVeyor enabling my pedantry
 pull_requests:
   do_not_increment_build_number: true
 
