@@ -19,9 +19,9 @@ pull_requests:
 # Install NuGet to grab modules from the PowerShell Gallery
 install:
 - ps: |
-    Install-PackageProvider -Name NuGet -Force
+    Install-PackageProvider -Name NuGet -Force | Out-Null
     Install-Module -Name Pester -Force
 
 # Offload all PowerShell test/build work to a separate file
 test_script:
-  - ps: . .\build.ps1
+  - ps: . .\Tests\build.ps1
