@@ -7,9 +7,11 @@
 build: off
 
 # Ignore testing a commit if only the readme changed
+# Or if I include "skip-tests" in the commit message
 skip_commits:
   files:
     - README.md
+  message: /skip\-tests/
 
 # PRs, by definition, don't change anything and therefore should not increment the version
 # To be fair, this is not important, and is really just AppVeyor enabling my pedantry

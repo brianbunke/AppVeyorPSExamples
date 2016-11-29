@@ -1,4 +1,6 @@
-﻿# Pester. Let's run some tests!
+﻿#Requires -Modules Pester
+
+# Pester. Let's run some tests!
 
 # Make this a stupid, quick function to avoid repeating the code twice
 function Pester-AppVeyor ($Tag) {
@@ -17,7 +19,10 @@ function Pester-AppVeyor ($Tag) {
     }
 }
 
+# Find all *.Tests.ps1 Pester files and run all Describe blocks tagged 'unit'
 Pester-AppVeyor -Tag 'unit'
+# Line break for readability in AppVeyor console
+Write-Host ''
 
 # Stop here if this isn't the master branch, or if this is a pull request
 If ($env:APPVEYOR_REPO_BRANCH -ne 'master') {
@@ -25,6 +30,10 @@ If ($env:APPVEYOR_REPO_BRANCH -ne 'master') {
 } ElseIf ($env:APPVEYOR_PULL_REQUEST_NUMBER -gt 0) {
     Write-Warning "Skipping integration tests for pull request #$env:APPVEYOR_PULL_REQUEST_NUMBER"
 } Else {
-    # Invoke-Pester against the integration tests
+    # Run tests again; this time, just the integration tests
     Pester-AppVeyor -Tag 'integration'
+    # Line break for readability in AppVeyor console
+    Write-Host ''
+
+    # Add more code for deploying to the PowerShell Gallery here
 }
